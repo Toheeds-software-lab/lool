@@ -1,0 +1,1298 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Security -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="format-detection" content="telephone=no">
+<title>TesSera — Tohid Nadaf | Software Engineer & App Developer</title>
+<meta name="description" content="Tohid Nadaf — Software Engineer building Android, iOS, Web apps and games. Based in Belgaum, Karnataka.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D10;
+    --bg-soft:#12151A;
+    --card:#15181D;
+    --line:#22262C;
+    --text:#F2F0EA;
+    --muted:#8B92A0;
+    --orange:#FF5A1F;
+    --blue:#4C7EFF;
+    --green:#22c55e;
+    --green-light:#4ade80;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--orange);color:#0B0D10;}
+
+  /* background grid texture */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    pointer-events:none;
+    z-index:0;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+  [data-reveal].in{opacity:1;transform:translateY(0);}
+  [data-reveal-delay="1"]{transition-delay:.1s;}
+  [data-reveal-delay="2"]{transition-delay:.2s;}
+  [data-reveal-delay="3"]{transition-delay:.3s;}
+  [data-reveal-delay="4"]{transition-delay:.4s;}
+  [data-reveal-delay="5"]{transition-delay:.5s;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(11,13,16,.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-weight:700;font-size:20px;letter-spacing:-.02em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo .dot{color:var(--orange);}
+  .navlinks{display:flex;gap:36px;font-size:14px;color:var(--muted);}
+  .navlinks a{position:relative;transition:.2s;}
+  .navlinks a:hover{color:var(--text);}
+  .navlinks a::after{
+    content:"";position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--orange);transition:width .3s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navcta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    border:1px solid var(--line);
+    padding:9px 18px;
+    border-radius:100px;
+    transition:.2s;
+  }
+  .navcta:hover{border-color:var(--orange);color:var(--orange);}
+  .navtoggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:168px 0 90px;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;color:var(--orange);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow .cursor{
+    display:inline-block;width:8px;height:16px;background:var(--orange);
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  h1{
+    font-size:clamp(40px,5.4vw,72px);
+    line-height:1.02;
+    font-weight:700;
+    letter-spacing:-.03em;
+    margin-bottom:24px;
+  }
+  h1 .accent{color:var(--orange);}
+  h1 .green{color:var(--green);}
+  .hero p.lead{
+    font-size:18px;color:var(--muted);max-width:520px;line-height:1.65;margin-bottom:34px;
+  }
+  .tagrow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    border:1px solid var(--line);color:var(--text);
+    padding:7px 13px;border-radius:6px;background:var(--bg-soft);
+    transition:.2s;
+  }
+  .tag:hover{border-color:var(--orange);}
+  .tag .b{color:var(--blue);}
+  .tag .o{color:var(--orange);}
+  .btnrow{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:8px;font-weight:600;font-size:15px;
+    transition:.25s;
+  }
+  .btn.primary{background:var(--orange);color:#0B0D10;}
+  .btn.primary:hover{background:#ff7440;transform:translateY(-2px);}
+  .btn.ghost{border:1px solid var(--line);color:var(--text);}
+  .btn.ghost:hover{border-color:var(--text);transform:translateY(-2px);}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    transition:transform .4s ease,border-color .4s ease;
+  }
+  .hero-visual:hover{transform:translateY(-4px);border-color:var(--orange);}
+  .hero-visual img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(15%) contrast(1.05);}
+  .hero-visual::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 50%, rgba(11,13,16,.9) 100%);
+  }
+  .hero-stat{
+    position:absolute;bottom:18px;left:18px;right:18px;
+    display:flex;justify-content:space-between;
+    z-index:2;
+  }
+  .hero-stat div{font-family:'JetBrains Mono',monospace;}
+  .hero-stat .num{font-size:22px;font-weight:600;color:var(--orange);}
+  .hero-stat .lbl{font-size:11px;color:var(--muted);}
+
+  section{padding:100px 0;border-top:1px solid var(--line);position:relative;z-index:1;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:56px;}
+  .sec-num{font-family:'JetBrains Mono',monospace;color:var(--orange);font-size:14px;}
+  .sec-title{font-size:clamp(28px,3.4vw,42px);font-weight:700;letter-spacing:-.02em;}
+  .sec-sub{color:var(--muted);font-size:16px;margin-top:-40px;margin-bottom:56px;max-width:560px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start;}
+  .about-photo{border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1/1;transition:.4s;}
+  .about-photo:hover{border-color:var(--orange);transform:translateY(-4px);}
+  .about-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:.4s;}
+  .about-photo:hover img{filter:grayscale(0%);}
+  .about-text p{color:var(--muted);font-size:17px;line-height:1.75;margin-bottom:20px;}
+  .about-text strong{color:var(--text);font-weight:600;}
+  .stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:36px;}
+  .stat-strip div{background:var(--bg-soft);padding:24px 20px;transition:.3s;}
+  .stat-strip div:hover{background:var(--card);}
+  .stat-strip .n{font-size:28px;font-weight:700;color:var(--orange);font-family:'JetBrains Mono',monospace;}
+  .stat-strip .l{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .skill-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:28px;transition:.25s;
+  }
+  .skill-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+  .skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .skill-name{font-size:16px;font-weight:600;}
+  .skill-pct{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);}
+  .skill-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;}
+  .skill-fill{height:100%;background:linear-gradient(90deg,var(--orange),#ff8c5a);border-radius:3px;width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1);}
+  .skill-card.in .skill-fill{width:var(--w);}
+
+  /* ---------- SERVICES ---------- */
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .svc-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:32px;transition:.25s;position:relative;overflow:hidden;
+  }
+  .svc-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+  .svc-idx{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .svc-card h3{font-size:21px;font-weight:600;margin-bottom:10px;}
+  .svc-card p{color:var(--muted);font-size:14.5px;line-height:1.6;margin-bottom:18px;}
+  .svc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .svc-tags span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);border:1px solid var(--line);padding:4px 9px;border-radius:5px;transition:.2s;}
+  .svc-card:hover .svc-tags span{border-color:var(--orange);color:var(--orange);}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-list{display:flex;flex-direction:column;}
+  .proj-row{
+    display:grid;grid-template-columns:.9fr 1.5fr .7fr;gap:24px;align-items:center;
+    padding:28px 0;border-bottom:1px solid var(--line);
+    transition:.3s;
+  }
+  .proj-row:hover{padding-left:12px;background:rgba(255,90,31,.03);}
+  .proj-row:first-child{border-top:1px solid var(--line);}
+  .proj-name{font-size:22px;font-weight:600;}
+  .proj-name .plat{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--orange);display:block;margin-top:6px;}
+  .proj-desc{color:var(--muted);font-size:15px;line-height:1.6;}
+  .proj-tag{
+    justify-self:end;font-family:'JetBrains Mono',monospace;font-size:12px;
+    border:1px solid var(--line);padding:8px 14px;border-radius:100px;color:var(--muted);
+    transition:.2s;
+  }
+  .proj-row:hover .proj-tag{border-color:var(--orange);color:var(--orange);}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-item{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);transition:.3s;}
+  .exp-item:hover{padding-left:12px;background:rgba(255,90,31,.03);}
+  .exp-item:first-child{border-top:1px solid var(--line);}
+  .exp-time{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;}
+  .exp-role{font-size:19px;font-weight:600;margin-bottom:6px;}
+  .exp-co{color:var(--orange);font-size:14px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;}
+  .exp-desc{color:var(--muted);font-size:15px;line-height:1.65;max-width:600px;}
+  .exp-bullets{margin-top:12px;padding-left:18px;}
+  .exp-bullets li{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:4px;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .testi-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:32px;transition:.25s;
+  }
+  .testi-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+  .testi-stars{color:var(--orange);font-size:14px;margin-bottom:16px;letter-spacing:2px;}
+  .testi-text{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:20px;}
+  .testi-author{display:flex;align-items:center;gap:12px;}
+  .testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--line);overflow:hidden;}
+  .testi-avatar img{width:100%;height:100%;object-fit:cover;}
+  .testi-name{font-weight:600;font-size:14px;}
+  .testi-role{font-size:12px;color:var(--muted);}
+
+  /* ---------- CERTS / ACHIEVEMENTS ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .cert-card{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:24px;text-align:center;transition:.25s;
+  }
+  .cert-card:hover{border-color:var(--orange);transform:translateY(-3px);}
+  .cert-icon{font-size:28px;margin-bottom:10px;}
+  .cert-title{font-size:14px;font-weight:600;margin-bottom:4px;}
+  .cert-sub{font-size:12px;color:var(--muted);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .contact-grid h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:20px;}
+  .contact-grid p{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:32px;max-width:440px;}
+  .clinks{display:flex;flex-direction:column;gap:0;}
+  .clink{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 0;border-bottom:1px solid var(--line);
+    transition:.2s;
+  }
+  .clink:hover{padding-left:8px;}
+  .clink:first-child{border-top:1px solid var(--line);}
+  .clink .k{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);}
+  .clink .v{font-size:16px;font-weight:500;color:var(--green);}
+  .clink .v:hover{color:var(--green-light);}
+  .arrow{color:var(--green);}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-wrap{overflow:hidden;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:60px 0;}
+  .marquee-track{display:flex;gap:48px;animation:marquee 30s linear infinite;width:max-content;}
+  .marquee-track span{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted);white-space:nowrap;}
+  .marquee-track span.dot{color:var(--orange);}
+  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  footer{
+    border-top:1px solid var(--line);padding:32px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .navlinks{display:none;}
+    .hero{grid-template-columns:1fr;padding-top:140px;}
+    .hero-visual{order:-1;max-width:340px;margin:0 auto;}
+    .about-grid{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:1fr;}
+    .svc-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .proj-row{grid-template-columns:1fr;gap:10px;}
+    .proj-tag{justify-self:start;}
+    .exp-item{grid-template-columns:1fr;gap:8px;}
+    .contact-grid{grid-template-columns:1fr;gap:40px;}
+    .testi-grid{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+
+  /* ---------- GAME ---------- */
+  .game-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;max-width:960px;margin:0 auto;}
+  .game-hud{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:14px;color:#F5A623;background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:12px;}
+  .game-hud b{color:var(--text);font-weight:600;}
+  .g-lives{display:flex;gap:6px;min-width:50px;justify-content:flex-end;}
+  .g-life{width:14px;height:14px;border-radius:50%;background:#FFD21F;display:inline-block;}
+  .game-board{position:relative;border-radius:10px;overflow:hidden;line-height:0;}
+  #gCanvas{width:100%;height:auto;display:block;background:#25282d;touch-action:auto;}
+  .game-overlay{position:absolute;inset:0;background:rgba(11,13,16,.84);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;line-height:1.4;}
+  .game-overlay.hide{display:none;}
+  .g-title{font-size:clamp(24px,5vw,40px);font-weight:700;color:#F5A623;letter-spacing:-.01em;}
+  .g-msg{color:var(--muted);font-size:15px;max-width:440px;}
+  .g-btn{background:var(--orange);color:#0B0D10;border:0;border-radius:8px;padding:12px 26px;font:600 15px 'Space Grotesk',sans-serif;cursor:pointer;transition:.2s;}
+  .g-btn:hover{background:#ff7440;transform:translateY(-2px);}
+  .dpad{display:none;grid-template-columns:repeat(3,68px);grid-template-rows:repeat(2,56px);gap:8px;justify-content:center;margin-top:14px;}
+  .dpad button{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:20px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+  .dpad button:active{border-color:var(--orange);color:var(--orange);}
+  .dpad .up{grid-column:2;grid-row:1;}
+  .dpad .left{grid-column:1;grid-row:2;}
+  .dpad .down{grid-column:2;grid-row:2;}
+  .dpad .right{grid-column:3;grid-row:2;}
+  .game-foot{margin-top:12px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .game-foot b{color:var(--text);font-weight:600;}
+  @media(max-width:860px),(pointer:coarse){.dpad{display:grid;}}
+  @media(max-width:520px){.game-hud{font-size:12px;padding:10px 12px;}.g-msg{font-size:13px;}}
+
+  /* game: sound button + retro game-over screen */
+  .game-board{container-type:inline-size;}
+  .game-board.shake{animation:gShake .45s steps(8);}
+  @keyframes gShake{0%{transform:translate(0,0);}25%{transform:translate(-6px,3px);}50%{transform:translate(6px,-3px);}75%{transform:translate(-4px,-2px);}100%{transform:translate(0,0);}}
+  .g-right{display:flex;align-items:center;gap:10px;}
+  .g-mute{background:none;border:1px solid var(--line);border-radius:6px;color:var(--text);font-size:14px;line-height:1;padding:4px 7px;cursor:pointer;}
+  .g-mute:hover{border-color:var(--orange);}
+  .go-scene{display:none;position:absolute;inset:0;overflow:hidden;flex-direction:column;align-items:center;justify-content:center;gap:2cqw;background:#2aa8ff;line-height:1.2;text-align:center;}
+  .go-scene.show{display:flex;animation:gShake .5s steps(6);}
+  .go-hill{position:absolute;bottom:30%;background:#1b86e0;border-radius:50% 50% 0 0;}
+  .go-hill.h1{left:-4%;width:34%;height:42%;}
+  .go-hill.h2{right:-6%;width:30%;height:34%;}
+  .go-grass{position:absolute;left:0;right:0;bottom:22%;height:12%;background:repeating-linear-gradient(90deg,#2fe23c 0 3%,#27c935 3% 6%);border-top:.7cqw solid #17a326;}
+  .go-dirt{position:absolute;left:0;right:0;bottom:0;height:22%;background-color:#a2622b;background-image:radial-gradient(circle at 20% 40%,#7a4519 0 1.6cqw,transparent 1.7cqw),radial-gradient(circle at 70% 60%,#7a4519 0 1.2cqw,transparent 1.3cqw),radial-gradient(circle at 90% 30%,#c58850 0 .9cqw,transparent 1cqw);}
+  .go-cloud{position:absolute;width:11cqw;height:4.6cqw;background:#fff;clip-path:polygon(0 100%,0 60%,12% 60%,12% 40%,28% 40%,28% 15%,50% 15%,50% 0,70% 0,70% 30%,88% 30%,88% 60%,100% 60%,100% 100%);animation:goDrift 16s linear infinite;}
+  .go-cloud.c1{top:12%;left:-12cqw;}
+  .go-cloud.c2{top:32%;left:-12cqw;width:8cqw;height:3.4cqw;animation-duration:22s;animation-delay:-9s;}
+  @keyframes goDrift{to{transform:translateX(125cqw);}}
+  .go-text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.8cqw;}
+  .go-word{position:relative;display:inline-block;font-family:'Press Start 2P',monospace;font-size:9.5cqw;letter-spacing:.02em;color:#000;-webkit-text-stroke:.22em #000;text-shadow:.1em .12em 0 #0a3f9e;animation:goDrop .8s steps(12) both,goBob .9s steps(2) 1s infinite alternate;}
+  .go-word.w2{animation-delay:.45s,1.35s;}
+  .go-word::after{content:attr(data-text);position:absolute;left:0;top:0;-webkit-text-stroke:0;text-shadow:none;color:transparent;background:linear-gradient(180deg,#fff6b0 0 16%,#ffd426 16% 38%,#ff9d1c 38% 60%,#ff5a17 60% 80%,#c9150f 80% 100%);-webkit-background-clip:text;background-clip:text;}
+  @keyframes goDrop{0%{transform:translateY(-320%);}70%{transform:translateY(9%);}85%{transform:translateY(-5%);}100%{transform:translateY(0);}}
+  @keyframes goBob{to{transform:translateY(-4%);}}
+  .go-score{position:relative;z-index:2;font-family:'Press Start 2P',monospace;font-size:max(9px,2.4cqw);color:#fff;text-shadow:.4cqw .4cqw 0 #000;margin-top:1cqw;}
+  .go-scene .g-btn{position:relative;z-index:2;font-size:max(11px,1.9cqw);padding:max(7px,1.3cqw) max(14px,2.8cqw);}
+  @media (prefers-reduced-motion:reduce){.go-word,.go-cloud,.go-scene.show,.game-board.shake{animation:none;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="dot">◆</span>TesSera</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="navcta mono">get_in_touch()</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero wrap" style="border-top:none;padding-top:168px;">
+  <div>
+    <div class="eyebrow">tohid@tessera:~$ <span class="cursor"></span></div>
+    <h1>Building software,<br><span class="accent">apps, games</span><br>and <span class="green">mobile Operating System &amp; Android OS development.</span></h1>
+    <p class="lead">I'm <strong style="color:var(--text)">Tohid Nadaf</strong>, a software engineer running <strong style="color:var(--text)">TesSera</strong> — I design and build Android & iOS apps, responsive websites, and mobile games from scratch. I also set up Google Business profiles so your product is actually discoverable. Based in Belgaum, open to remote work worldwide.</p>
+    <div class="tagrow">
+      <span class="tag"><span class="o">&lt;</span>Android<span class="o">/&gt;</span></span>
+      <span class="tag"><span class="b">&lt;</span>iOS<span class="b">/&gt;</span></span>
+      <span class="tag"><span class="o">&lt;</span>Web<span class="o">/&gt;</span></span>
+      <span class="tag"><span class="b">&lt;</span>Game Dev<span class="b">/&gt;</span></span>
+      <span class="tag"><span class="o">&lt;</span>Google Business<span class="o">/&gt;</span></span>
+      <span class="tag"><span class="b">&lt;</span>UI/UX<span class="b">/&gt;</span></span>
+      <span class="tag"><span class="o">&lt;</span>OS Development<span class="o">/&gt;</span></span>
+      <span class="tag"><span class="b">&lt;</span>Linux Kernel Development<span class="b">/&gt;</span></span>
+    </div>
+    <div class="btnrow">
+      <a href="#contact" class="btn primary">Start a project →</a>
+      <a href="#projects" class="btn ghost">View my work</a>
+      <a href="https://github.com/tohids-software-lab" target="_blank" rel="noopener noreferrer" class="btn ghost">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hero-visual" data-reveal>
+    <img src="images/hero.jpg" alt="Tohid Nadaf">
+    <div class="hero-stat">
+      <div><div class="num">2+</div><div class="lbl">yrs experience</div></div>
+      <div><div class="num">2</div><div class="lbl">apps shipped</div></div>
+      <div><div class="num">Goa</div><div class="lbl">ex-junior SWE</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Android Development</span><span class="dot">◆</span>
+    <span>iOS Development</span><span class="dot">◆</span>
+    <span>Web Development</span><span class="dot">◆</span>
+    <span>Game Development</span><span class="dot">◆</span>
+    <span>Google Business Setup</span><span class="dot">◆</span>
+    <span>UI/UX Design</span><span class="dot">◆</span>
+    <span>React Native</span><span class="dot">◆</span>
+    <span>Flutter</span><span class="dot">◆</span>
+    <span>LineageOS</span><span class="dot">◆</span>
+    <span>Linux Kernel</span><span class="dot">◆</span>
+    <span>Android Development</span><span class="dot">◆</span>
+    <span>iOS Development</span><span class="dot">◆</span>
+    <span>Web Development</span><span class="dot">◆</span>
+    <span>Game Development</span><span class="dot">◆</span>
+    <span>Google Business Setup</span><span class="dot">◆</span>
+    <span>UI/UX Design</span><span class="dot">◆</span>
+    <span>React Native</span><span class="dot">◆</span>
+    <span>Flutter</span><span class="dot">◆</span>
+    <span>LineageOS</span><span class="dot">◆</span>
+    <span>Linux Kernel</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">01</span>
+      <span class="sec-title">About</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo" data-reveal>
+        <img src="images/portrait2.jpg" alt="Tohid Nadaf portrait">
+      </div>
+      <div class="about-text">
+        <p data-reveal>I'm a software engineer based in <strong>Belgaum, Karnataka</strong>, running my own build studio <strong>TesSera</strong>. I started as a <strong>Junior Software Engineer in Goa</strong>, where I built production-grade systems and learned how real software gets shipped. Now I work independently — building end-to-end products for founders and small businesses.</p>
+        <p data-reveal data-reveal-delay="1">I own the full stack of a launch: the mobile app, the responsive website, the game engine logic, and the Google Business presence that makes it discoverable. I write clean, maintainable code and care deeply about performance, user experience, and pixel-perfect design.</p>
+        <p data-reveal data-reveal-delay="2">Whether it's a native Android app in Kotlin, a cross-platform build in React Native, a fast-loading marketing site, or an endless racing game — if it needs to be built and shipped, I'll build it.</p>
+        <p data-reveal data-reveal-delay="3">I'm currently working on <strong>custom Android OS development with LineageOS</strong>, and developing the <strong>Linux kernel</strong> for it — focused on a stable, secure, and smooth user experience.</p>
+        <div class="stat-strip" data-reveal data-reveal-delay="3">
+          <div><div class="n">2+</div><div class="l">Years building software</div></div>
+          <div><div class="n">2</div><div class="l">Apps in production</div></div>
+          <div><div class="n">5+</div><div class="l">Projects delivered</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">02</span>
+      <span class="sec-title">Tech Stack & Skills</span>
+    </div>
+    <p class="sec-sub" data-reveal>Technologies and tools I use daily to design, build, and ship software products.</p>
+    <div class="skills-grid">
+      <div class="skill-card" data-reveal data-skill="90">
+        <div class="skill-header"><span class="skill-name">Android (Kotlin / Java)</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="85" data-reveal-delay="1">
+        <div class="skill-header"><span class="skill-name">iOS (Swift / React Native)</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="75" data-reveal-delay="2">
+        <div class="skill-header"><span class="skill-name">Operating System Development (LineageOS / Android OS)</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="80" data-reveal-delay="3">
+        <div class="skill-header"><span class="skill-name">Game Development (Unity / C#)</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="82" data-reveal-delay="4">
+        <div class="skill-header"><span class="skill-name">UI/UX Design (Figma)</span><span class="skill-pct">82%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:82%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="75" data-reveal-delay="5">
+        <div class="skill-header"><span class="skill-name">Google Business & Local SEO</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:75%"></div></div>
+      </div>
+      <div class="skill-card" data-reveal data-skill="70" data-reveal-delay="5">
+        <div class="skill-header"><span class="skill-name">Kernel Development (Linux Kernel)</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--w:70%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">03</span>
+      <span class="sec-title">Services</span>
+    </div>
+    <p class="sec-sub" data-reveal>End-to-end product development — from concept to app store, from wireframe to live website.</p>
+    <div class="svc-grid">
+      <div class="svc-card" data-reveal>
+        <div class="svc-idx">app/</div>
+        <h3>Android & iOS Apps</h3>
+        <p>Native and cross-platform mobile apps built from idea to app store. I handle architecture, UI/UX, API integration, and publishing — like Cleaner X, a full-featured device cleaner and optimizer for Android and iOS.</p>
+        <div class="svc-tags"><span>Kotlin</span><span>Java</span><span>Swift</span><span>React Native</span><span>Cleaner X</span></div>
+      </div>
+      <div class="svc-card" data-reveal data-reveal-delay="1">
+        <div class="svc-idx">os/</div>
+        <h3>OS & Kernel Development</h3>
+        <p>Custom mobile operating system and Android OS development with LineageOS, plus Linux kernel development — focused on performance, stability, security, and a smooth user experience.</p>
+        <div class="svc-tags"><span>LineageOS</span><span>Android OS</span><span>Linux Kernel</span><span>Custom ROM</span></div>
+      </div>
+      <div class="svc-card" data-reveal data-reveal-delay="2">
+        <div class="svc-idx">game/</div>
+        <h3>Game Development</h3>
+        <p>Original mobile games built end-to-end — concept, design, mechanics, and deployment. Fast Track is an endless racing game I designed and developed solo for mobile platforms.</p>
+        <div class="svc-tags"><span>Unity</span><span>C#</span><span>Mobile</span><span>Fast Track</span></div>
+      </div>
+      <div class="svc-card" data-reveal data-reveal-delay="3">
+        <div class="svc-idx">local/</div>
+        <h3>Google Business & Local SEO</h3>
+        <p>Complete Google Business Profile setup and optimization. I ensure your business is discoverable, properly categorized, and ranked for local search — so customers can find, call, and visit you.</p>
+        <div class="svc-tags"><span>Google Business</span><span>Local SEO</span><span>Maps Setup</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">04</span>
+      <span class="sec-title">Selected Projects</span>
+    </div>
+    <p class="sec-sub" data-reveal>Real products I've designed, built, and shipped — from mobile apps to games and business websites.</p>
+    <div class="proj-list">
+      <div class="proj-row" data-reveal>
+        <div class="proj-name">Cleaner X<span class="plat">Android · iOS · Kotlin · Swift</span></div>
+        <div class="proj-desc">A full-featured device cleaner and optimizer app that clears junk files, frees up storage, manages RAM, and helps phones run faster. Built natively for Android and iOS with a clean, intuitive UI.</div>
+        <div class="proj-tag">App</div>
+      </div>
+      <div class="proj-row" data-reveal data-reveal-delay="1">
+        <div class="proj-name">Fast Track<span class="plat">Mobile Game · Unity · C#</span></div>
+        <div class="proj-desc">A fast-paced endless racing game built for mobile platforms. Designed and developed solo end-to-end — including game mechanics, level design, UI, sound integration, and store publishing.</div>
+        <div class="proj-tag">Game</div>
+      </div>
+      <div class="proj-row" data-reveal data-reveal-delay="1">
+        <div class="proj-name">Custom OS Development<span class="plat">LineageOS · Android · In Progress</span></div>
+        <div class="proj-desc">Currently working on OS development with LineageOS — customizing and building the system for better performance, stability, and a clean, smooth user experience.</div>
+        <div class="proj-tag">OS</div>
+      </div>
+      <div class="proj-row" data-reveal data-reveal-delay="2">
+        <div class="proj-name">Linux Kernel Development<span class="plat">Linux Kernel · C · In Progress</span></div>
+        <div class="proj-desc">Developing the Linux kernel for the OS to improve responsiveness, efficiency, and overall smooth user experience on the device.</div>
+        <div class="proj-tag">Kernel</div>
+      </div>
+      <div class="proj-row" data-reveal data-reveal-delay="2">
+        <div class="proj-name">Client Websites & Portfolios<span class="plat">Web · React · HTML/CSS/JS</span></div>
+        <div class="proj-desc">Custom-built responsive websites and portfolios for small businesses, startups, and personal brands. Focused on speed, SEO, and conversion-optimized design with clean, maintainable code.</div>
+        <div class="proj-tag">Web</div>
+      </div>
+      <div class="proj-row" data-reveal data-reveal-delay="3">
+        <div class="proj-name">Google Business Profiles<span class="plat">Local SEO · Google Maps</span></div>
+        <div class="proj-desc">End-to-end Google Business Profile setup, verification, and optimization for local businesses. Includes category selection, keyword-rich descriptions, photo uploads, and review strategy.</div>
+        <div class="proj-tag">SEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">05</span>
+      <span class="sec-title">Experience</span>
+    </div>
+    <div class="exp-item" data-reveal>
+      <div class="exp-time">2026 — Present</div>
+      <div>
+        <div class="exp-role">Founder & Lead Software Engineer</div>
+        <div class="exp-co">TesSera — Belgaum, Karnataka</div>
+        <div class="exp-desc">Running my own software studio building and shipping Android/iOS apps, websites, and games for founders and small businesses. Managing the full product lifecycle from client discovery to deployment and maintenance.</div>
+        <ul class="exp-bullets">
+          <li>Shipped Cleaner X — a device cleaner app for Android & iOS</li>
+          <li>Built and published Fast Track — an endless racing mobile game</li>
+          <li>Delivered 5+ client websites with SEO and Google Business integration</li>
+          <li>Managed end-to-end client communication, design, development, and deployment</li>
+          <li>Currently working on OS development with LineageOS and Linux kernel development for a smooth user experience</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item" data-reveal data-reveal-delay="1">
+      <div class="exp-time">2025</div>
+      <div>
+        <div class="exp-role">Junior Software Engineer</div>
+        <div class="exp-co">Codanto — Software Company in Goa</div>
+        <div class="exp-desc">Worked in a professional engineering team building production-grade software. Gained hands-on experience with agile development, code reviews, version control, and shipping features to real users.</div>
+        <ul class="exp-bullets">
+          <li>Developed and maintained production mobile and web applications</li>
+          <li>Collaborated with senior engineers on architecture and code quality</li>
+          <li>Learned enterprise-level development workflows and deployment pipelines</li>
+          <li>Built the technical foundation that now powers TesSera</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">06</span>
+      <span class="sec-title">What Clients Say</span>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card" data-reveal>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Tohid built our business website from scratch and set up our Google Business profile. Within two weeks we started getting calls from new customers. Professional, fast, and genuinely cares about results."</div>
+        <div class="testi-author">
+          <div class="testi-avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--orange),#ff8c5a);"></div></div>
+          <div><div class="testi-name">Rahul Patil</div><div class="testi-role">Business Owner, Belgaum</div></div>
+        </div>
+      </div>
+      <div class="testi-card" data-reveal data-reveal-delay="1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"The Cleaner X app exceeded our expectations. Clean UI, smooth performance, and Tohid handled the entire Play Store publishing process. A rare engineer who understands both code and design."</div>
+        <div class="testi-author">
+          <div class="testi-avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--blue),#7aa3ff);"></div></div>
+          <div><div class="testi-name">Sneha Kulkarni</div><div class="testi-role">Startup Founder</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS / ACHIEVEMENTS -->
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">07</span>
+      <span class="sec-title">Achievements</span>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card" data-reveal>
+        <div class="cert-icon">🏆</div>
+        <div class="cert-title">2 Apps Shipped</div>
+        <div class="cert-sub">Cleaner X & Fast Track published</div>
+      </div>
+      <div class="cert-card" data-reveal data-reveal-delay="1">
+        <div class="cert-icon">🚀</div>
+        <div class="cert-title">5+ Projects Delivered</div>
+        <div class="cert-sub">Websites, apps & games for clients</div>
+      </div>
+      <div class="cert-card" data-reveal data-reveal-delay="2">
+        <div class="cert-icon">📍</div>
+        <div class="cert-title">Google Business Expert</div>
+        <div class="cert-sub">Local SEO & profile optimization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div data-reveal>
+        <h2>Let's build<br>something great.</h2>
+        <p>Have an app idea, need a website, or want to launch a game? I'm based in Belgaum and work with clients everywhere. Reach out and let's discuss your project — no commitment required.</p>
+        <a href="mailto:nadaftohid88@gmail.com" class="btn primary">Email me →</a>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://github.com/tohids-software-lab" target="_blank" rel="noopener noreferrer" class="btn ghost">GitHub ↗</a>
+          <a href="tel:+918123102410" class="btn ghost">Call ↗</a>
+        </div>
+      </div>
+      <div class="clinks" data-reveal data-reveal-delay="1">
+        <div class="clink"><span class="k">PHONE</span><a class="v" href="tel:+918123102410">+91 81231 02410</a></div>
+        <div class="clink"><span class="k">EMAIL</span><a class="v" href="mailto:nadaftohid88@gmail.com">nadaftohid88@gmail.com</a></div>
+        <div class="clink"><span class="k">GITHUB</span><a class="v" href="https://github.com/tohids-software-lab" target="_blank" rel="noopener noreferrer">tohids-software-lab <span class="arrow">↗</span></a></div>
+        <div class="clink"><span class="k">LOCATION</span><span class="v">Aman nagar belgaum59001</span></div>
+        <div class="clink"><span class="k">AVAILABILITY</span><span class="v" style="color:var(--green);">● Open for projects</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME -->
+<section id="game">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="sec-num">08</span>
+      <span class="sec-title">Play a Game</span>
+    </div>
+    <p class="sec-sub" data-reveal>Easy to play with 120 levels. Collect every dot, dodge the drones, and grab a glowing power cell to turn the tables.</p>
+    <div class="game-card" data-reveal>
+      <div class="game-hud">
+        <span>Score: <b id="gScore">0</b></span>
+        <span>Level: <b id="gLevel">1</b> / 120</span>
+        <span class="g-right"><button type="button" class="g-mute" id="gMute" aria-label="Sound on or off">🔊</button><span id="gLives" class="g-lives"></span></span>
+      </div>
+      <div class="game-board">
+        <canvas id="gCanvas" width="840" height="440"></canvas>
+        <div class="game-overlay" id="gOverlay">
+          <div class="g-title" id="gTitle">Dot Rush</div>
+          <div class="g-msg" id="gMsg">Collect every dot and dodge the drones. Grab a glowing power cell to scare them, then catch them for bonus points. 120 levels to beat!</div>
+          <button class="g-btn" id="gStart" type="button">Start game</button>
+        </div>
+        <div class="go-scene" id="gOver">
+          <div class="go-hill h1"></div><div class="go-hill h2"></div>
+          <div class="go-cloud c1"></div><div class="go-cloud c2"></div>
+          <div class="go-grass"></div><div class="go-dirt"></div>
+          <div class="go-text">
+            <div class="go-word w1" data-text="GAME">GAME</div>
+            <div class="go-word w2" data-text="OVER">OVER</div>
+          </div>
+          <div class="go-score" id="goScore"></div>
+          <button class="g-btn" id="goAgain" type="button">Play again</button>
+        </div>
+      </div>
+      <div class="dpad">
+        <button type="button" class="up" data-d="u" aria-label="Up">▲</button>
+        <button type="button" class="left" data-d="l" aria-label="Left">◀</button>
+        <button type="button" class="down" data-d="d" aria-label="Down">▼</button>
+        <button type="button" class="right" data-d="r" aria-label="Right">▶</button>
+      </div>
+      <div class="game-foot">Arrow keys / WASD or swipe to move · P to pause · Best score: <b id="gBest">0</b></div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div>© 2026 TesSera. Built by Tohid Nadaf.</div>
+  <div>Belgaum, Karnataka — India</div>
+</footer>
+
+<script>
+  // Scroll reveal with IntersectionObserver
+  const els = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+
+  // Skill bar animation
+  const skillCards = document.querySelectorAll('.skill-card');
+  const skillIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); skillIo.unobserve(e.target);} });
+  },{threshold:.3});
+  skillCards.forEach(el=>skillIo.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+    anchor.addEventListener('click',function(e){
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // Navbar active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navlinks a');
+  window.addEventListener('scroll',()=>{
+    let current = '';
+    sections.forEach(sec=>{
+      const top = sec.offsetTop - 120;
+      if(scrollY >= top) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(link=>{
+      link.style.color = '';
+      if(link.getAttribute('href')==='#'+current) link.style.color='var(--text)';
+    });
+  });
+</script>
+
+<script>
+/* Dot Rush: a small maze game with 120 generated levels */
+(function(){
+  const cv=document.getElementById('gCanvas');
+  if(!cv||!cv.getContext) return;
+  const ctx=cv.getContext('2d');
+  const C=21,R=11,T=40,TUN=5,MAXL=120,PSPEED=5.6;
+  cv.width=C*T; cv.height=R*T;
+  const mazeCv=document.createElement('canvas'); mazeCv.width=C*T; mazeCv.height=R*T;
+  const $=id=>document.getElementById(id);
+  const scoreEl=$('gScore'),levelEl=$('gLevel'),livesEl=$('gLives'),bestEl=$('gBest');
+  const ov=$('gOverlay'),ovT=$('gTitle'),ovM=$('gMsg'),startBtn=$('gStart');
+  const goEl=$('gOver'),goScore=$('goScore'),goAgain=$('goAgain'),muteBtn=$('gMute'),board=document.querySelector('.game-board');
+  const AMBER='#F5A623',NAVY='#0b1033',FLOOR='#25282d',DOTC='#7be3f6';
+  const DIRS=[[1,0],[-1,0],[0,1],[0,-1]];
+  const VEC={u:[0,-1],d:[0,1],l:[-1,0],r:[1,0]};
+  const COLORS=['#35e0f0','#ff7ac8','#ffb02e','#ff4d4d'];
+
+  /* ---------- sound (all synthesized in the browser, no files) ---------- */
+  const Snd=(function(){
+    let ac=null,muted=false,musicOn=false,nextT=0,step=0,timer=null,alt=0,musicGain=null;
+    try{muted=localStorage.getItem('dotrush_mute')==='1';}catch(e){}
+    const LEAD=[69,0,72,0,74,72,69,0, 67,0,69,0,72,69,67,0, 64,0,67,0,69,67,64,0, 69,72,76,72,74,72,69,0];
+    const BASS=[45,45,45,45, 43,43,43,43, 41,41,41,41, 40,40,45,45];
+    const mf=m=>440*Math.pow(2,(m-69)/12);
+    function init(){
+      if(ac){ if(ac.state==='suspended') ac.resume(); return; }
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC) return;
+      try{
+        ac=new AC();
+        musicGain=ac.createGain(); musicGain.gain.value=0.07; musicGain.connect(ac.destination);
+      }catch(e){ac=null;}
+    }
+    function tone(f,t,dur,type,vol,dest,slideTo){
+      if(!ac||muted) return;
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.type=type; o.frequency.setValueAtTime(f,t);
+      if(slideTo) o.frequency.exponentialRampToValueAtTime(slideTo,t+dur);
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(vol,t+0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      o.connect(g); g.connect(dest||ac.destination);
+      o.start(t); o.stop(t+dur+0.03);
+    }
+    function seq(notes,gap,dur,type,vol){
+      if(!ac) return;
+      const t0=ac.currentTime+0.01;
+      notes.forEach(function(n,i){tone(n,t0+i*gap,dur,type,vol);});
+    }
+    function sched(){
+      if(!musicOn||!ac) return;
+      while(nextT<ac.currentTime+0.35){
+        const s=step%32,l=LEAD[s];
+        if(l) tone(mf(l),nextT,0.17,'square',0.5,musicGain);
+        if(s%2===0) tone(mf(BASS[s>>1]),nextT,0.34,'triangle',0.9,musicGain);
+        nextT+=0.2; step++;
+      }
+    }
+    return {
+      init:init,
+      isMuted:function(){return muted;},
+      toggle:function(){
+        muted=!muted;
+        try{localStorage.setItem('dotrush_mute',muted?'1':'0');}catch(e){}
+        return muted;
+      },
+      music:function(on){
+        if(!ac) return;
+        if(on&&!musicOn){musicOn=true; nextT=ac.currentTime+0.05; step=0; timer=setInterval(sched,100);}
+        else if(!on&&musicOn){musicOn=false; clearInterval(timer);}
+      },
+      blip:function(){ if(!ac) return; alt^=1; tone(alt?660:880,ac.currentTime,0.07,'square',0.12); },
+      power:function(){ seq([440,554,659,880,1108],0.06,0.1,'square',0.16); },
+      eatDrone:function(){ if(!ac) return; tone(300,ac.currentTime,0.25,'square',0.2,null,1400); },
+      caught:function(){
+        if(!ac) return;
+        const t=ac.currentTime;
+        tone(620,t,0.9,'sawtooth',0.22,null,60);
+        tone(310,t+0.05,0.8,'square',0.12,null,40);
+      },
+      start:function(){ seq([523,659,784],0.11,0.14,'square',0.16); },
+      levelUp:function(){ seq([523,659,784,1047,1319],0.09,0.12,'square',0.17); },
+      gameOver:function(){
+        if(!ac) return;
+        seq([392,330,262,196],0.24,0.22,'square',0.2);
+        tone(98,ac.currentTime+1.0,1.0,'triangle',0.3,null,70);
+      },
+      win:function(){ seq([523,659,784,1047,784,1047,1319,1568],0.12,0.16,'square',0.18); }
+    };
+  })();
+
+  let grid=[],dots=[],dotCount=0;
+  let level=1,score=0,lives=3,best=0,state='idle',want=null,frightT=0,hitT=0,token=0;
+  let player=null,enemies=[],P=null;
+  try{best=parseInt(localStorage.getItem('dotrush_best')||'0',10)||0;}catch(e){}
+
+  /* ---------- maze generation (unique, repeatable maze for every level) ---------- */
+  function rng(seed){
+    let a=seed>>>0;
+    return function(){
+      a|=0; a=a+0x6D2B79F5|0;
+      let t=Math.imul(a^a>>>15,1|a);
+      t=t+Math.imul(t^t>>>7,61|t)^t;
+      return ((t^t>>>14)>>>0)/4294967296;
+    };
+  }
+  function genMaze(lv){
+    const rand=rng(lv*7919+13);
+    const g=[];
+    for(let y=0;y<R;y++) g.push(new Array(C).fill('#'));
+    const seen={};
+    const stack=[[1,1]]; g[1][1]='.'; seen['1,1']=1;
+    while(stack.length){
+      const cur=stack[stack.length-1],cx=cur[0],cy=cur[1];
+      const opts=[];
+      for(const d of DIRS){
+        const nx=cx+d[0]*2,ny=cy+d[1]*2;
+        if(nx>=1&&nx<=9&&ny>=1&&ny<=9&&!seen[nx+','+ny]) opts.push([nx,ny,d[0],d[1]]);
+      }
+      if(!opts.length){stack.pop();continue;}
+      const o=opts[Math.floor(rand()*opts.length)];
+      g[cy+o[3]][cx+o[2]]='.'; g[o[1]][o[0]]='.'; seen[o[0]+','+o[1]]=1;
+      stack.push([o[0],o[1]]);
+    }
+    for(let y=0;y<R;y++) for(let x=1;x<=9;x++) g[y][C-1-x]=g[y][x];
+    for(const y of [1,3,5,7,9]) if(y===5||y===9||rand()<0.5) g[y][10]='.';
+    // remove dead ends
+    for(let y=1;y<R-1;y+=2) for(let x=1;x<C-1;x+=2){
+      let open=0; const closed=[];
+      for(const d of DIRS){
+        const wx=x+d[0],wy=y+d[1];
+        if(g[wy][wx]!=='#') open++;
+        else{
+          const nx=x+d[0]*2,ny=y+d[1]*2;
+          if(nx>=1&&nx<=C-2&&ny>=1&&ny<=R-2) closed.push([wx,wy]);
+        }
+      }
+      if(open<=1&&closed.length){const c=closed[Math.floor(rand()*closed.length)]; g[c[1]][c[0]]='.';}
+    }
+    // a few extra loops
+    for(let y=1;y<R-1;y++) for(let x=1;x<C-1;x++){
+      if((x+y)%2===1&&g[y][x]==='#'&&rand()<0.12) g[y][x]='.';
+    }
+    g[TUN][0]='.'; g[TUN][C-1]='.';
+    return g;
+  }
+
+  function params(L){
+    return {
+      spd:Math.min(5.2,3.0+L*0.022),
+      n:Math.min(4,1+Math.ceil(L/3)),
+      rnd:Math.max(0.08,0.55-L*0.005),
+      fr:Math.max(3,8-L*0.04)
+    };
+  }
+
+  /* ---------- level setup ---------- */
+  function isWall(x,y){return x>=0&&x<C&&y>=0&&y<R&&grid[y][x]==='#';}
+  function drawMaze(){
+    const m=mazeCv.getContext('2d'),b=3;
+    m.fillStyle=FLOOR; m.fillRect(0,0,mazeCv.width,mazeCv.height);
+    m.fillStyle=AMBER;
+    for(let y=0;y<R;y++) for(let x=0;x<C;x++) if(grid[y][x]==='#') m.fillRect(x*T,y*T,T,T);
+    m.fillStyle=NAVY;
+    for(let y=0;y<R;y++) for(let x=0;x<C;x++){
+      if(grid[y][x]!=='#') continue;
+      const iL=isWall(x-1,y)?0:b,iR=isWall(x+1,y)?0:b,iT=isWall(x,y-1)?0:b,iB=isWall(x,y+1)?0:b;
+      m.fillRect(x*T+iL,y*T+iT,T-iL-iR,T-iT-iB);
+    }
+    m.fillStyle=AMBER;
+    for(let y=0;y<R;y++) for(let x=0;x<C;x++){
+      if(grid[y][x]!=='#') continue;
+      for(const sx of [-1,1]) for(const sy of [-1,1]){
+        if(isWall(x+sx,y)&&isWall(x,y+sy)&&!isWall(x+sx,y+sy)){
+          m.fillRect(sx>0?x*T+T-b:x*T, sy>0?y*T+T-b:y*T, b, b);
+        }
+      }
+    }
+  }
+  function buildLevel(){
+    grid=genMaze(level);
+    dots=[]; dotCount=0;
+    for(let y=0;y<R;y++){
+      dots.push([]);
+      for(let x=0;x<C;x++) dots[y].push(grid[y][x]!=='#'?1:0);
+    }
+    for(const p of [[1,1],[19,1],[1,9],[19,9]]) dots[p[1]][p[0]]=2;
+    for(const p of [[10,9],[10,5],[9,5],[11,5],[0,TUN],[C-1,TUN]]) dots[p[1]][p[0]]=0;
+    for(let y=0;y<R;y++) for(let x=0;x<C;x++) if(dots[y][x]) dotCount++;
+    drawMaze();
+  }
+  function mk(tx,ty){return {tx:tx,ty:ty,dx:0,dy:0,t:0};}
+  function resetPositions(){
+    P=params(level);
+    player=mk(10,9); want=null; frightT=0;
+    const homes=[[10,5],[9,5],[11,5],[10,5]];
+    const gap=Math.max(0.8,2-level*0.01);
+    enemies=[];
+    for(let i=0;i<P.n;i++){
+      const e=mk(homes[i][0],homes[i][1]);
+      e.i=i; e.home=homes[i]; e.color=COLORS[i];
+      e.alive=true; e.fright=false; e.respawn=0;
+      e.delay=0.6+i*gap; e.rnd=P.rnd+(i===2?0.2:0);
+      enemies.push(e);
+    }
+  }
+
+  /* ---------- movement ---------- */
+  function open(x,y){
+    if(y<0||y>=R) return false;
+    if(x<0||x>=C) return y===TUN;
+    return grid[y][x]!=='#';
+  }
+  function wrapX(x){return x<0?C-1:(x>=C?0:x);}
+  function pos(e){return {x:e.tx+e.dx*e.t,y:e.ty+e.dy*e.t};}
+  function advance(e,dist,chooser){
+    let guard=0;
+    while(dist>1e-6&&guard++<8){
+      if(e.dx===0&&e.dy===0){
+        const d=chooser(e);
+        if(!d||(d[0]===0&&d[1]===0)) return;
+        e.dx=d[0]; e.dy=d[1]; e.t=0;
+      }
+      const need=1-e.t;
+      if(dist>=need){
+        e.tx=wrapX(e.tx+e.dx); e.ty+=e.dy; e.t=0; dist-=need;
+        const d=chooser(e);
+        if(d&&(d[0]||d[1])){e.dx=d[0]; e.dy=d[1];}
+        else{e.dx=0; e.dy=0; return;}
+      }else{e.t+=dist; dist=0;}
+    }
+  }
+  function playerChooser(e){
+    if(want&&open(e.tx+want[0],e.ty+want[1])) return want;
+    if((e.dx||e.dy)&&open(e.tx+e.dx,e.ty+e.dy)) return [e.dx,e.dy];
+    return null;
+  }
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function target(en){
+    const p=pos(player),px=Math.round(p.x),py=Math.round(p.y);
+    if(en.i===1) return {x:clamp(px+player.dx*4,0,C-1),y:clamp(py+player.dy*4,0,R-1)};
+    if(en.i===3&&Math.hypot(en.tx-px,en.ty-py)<5) return {x:1,y:R-2};
+    return {x:px,y:py};
+  }
+  function enemyChooser(en){
+    const opts=[];
+    for(const d of DIRS){
+      if((en.dx||en.dy)&&d[0]===-en.dx&&d[1]===-en.dy) continue;
+      if(open(en.tx+d[0],en.ty+d[1])) opts.push(d);
+    }
+    if(!opts.length){
+      for(const d of DIRS) if(open(en.tx+d[0],en.ty+d[1])) opts.push(d);
+    }
+    if(!opts.length) return null;
+    if(en.fright||Math.random()<en.rnd) return opts[Math.floor(Math.random()*opts.length)];
+    const tg=target(en);
+    let best2=null,bd=1e9;
+    for(const d of opts){
+      const nx=wrapX(en.tx+d[0]),ny=en.ty+d[1];
+      const dd=(nx-tg.x)*(nx-tg.x)+(ny-tg.y)*(ny-tg.y);
+      if(dd<bd){bd=dd; best2=d;}
+    }
+    return best2;
+  }
+
+  /* ---------- game flow ---------- */
+  function setState(s){
+    state=s;
+    cv.style.touchAction=(s==='playing'||s==='hit'||s==='banner')?'none':'auto';
+    Snd.music(s==='playing');
+  }
+  function shake(){
+    board.classList.remove('shake'); void board.offsetWidth; board.classList.add('shake');
+    setTimeout(function(){board.classList.remove('shake');},500);
+  }
+  function hud(){
+    scoreEl.textContent=score; levelEl.textContent=Math.min(level,MAXL);
+    bestEl.textContent=Math.max(best,score);
+    livesEl.innerHTML='';
+    for(let i=0;i<lives;i++){const s=document.createElement('span'); s.className='g-life'; livesEl.appendChild(s);}
+  }
+  function showOverlay(t,m,btn){
+    ovT.textContent=t; ovM.textContent=m;
+    if(btn){startBtn.textContent=btn; startBtn.style.display='';}
+    else startBtn.style.display='none';
+    ov.classList.remove('hide');
+  }
+  function hideOverlay(){ov.classList.add('hide');}
+  function banner(t,m,ms){
+    const my=++token;
+    setState('banner'); showOverlay(t,m,null);
+    setTimeout(function(){
+      if(token===my&&state==='banner'){hideOverlay(); setState('playing');}
+    },ms);
+  }
+  function saveBest(){
+    if(score>best){best=score; try{localStorage.setItem('dotrush_best',String(best));}catch(e){}}
+  }
+  function startLevel(){
+    buildLevel(); resetPositions(); hud();
+    banner('Level '+level,level===1?'Collect all the dots!':'Get ready!',1300);
+  }
+  function newGame(){
+    token++; score=0; level=1; lives=3;
+    goEl.classList.remove('show'); Snd.start(); startLevel();
+  }
+  function gameOver(win){
+    saveBest(); hud(); setState('over'); hideOverlay();
+    if(win){
+      Snd.win();
+      showOverlay('You beat all '+MAXL+' levels!','Score '+score+' · Level '+MAXL,'Play again');
+      return;
+    }
+    Snd.gameOver();
+    goScore.textContent='SCORE '+score+'   LEVEL '+Math.min(level,MAXL);
+    goEl.classList.add('show');
+  }
+  function loseLife(){
+    lives--; hud(); Snd.caught(); shake();
+    hitT=lives<=0?1.4:1.1; setState('hit');
+  }
+  function levelDone(){
+    score+=100; level++; Snd.levelUp();
+    if(level>MAXL){gameOver(true);}
+    else{startLevel();}
+  }
+  function pause(){
+    if(state!=='playing') return;
+    setState('paused'); showOverlay('Paused','Take a break. The game waits for you.','Resume');
+  }
+  function resume(){
+    if(state!=='paused') return;
+    hideOverlay(); setState('playing');
+  }
+  function eatDots(){
+    const pp=pos(player),cx=Math.round(pp.x),cy=Math.round(pp.y);
+    if(cx<0||cx>=C||cy<0||cy>=R) return;
+    if(Math.hypot(pp.x-cx,pp.y-cy)>=0.45) return;
+    const v=dots[cy][cx];
+    if(!v) return;
+    dots[cy][cx]=0; dotCount--;
+    score+=(v===2?50:10);
+    if(v===1) Snd.blip(); else Snd.power();
+    if(v===2){
+      frightT=P.fr;
+      enemies.forEach(function(e){if(e.alive) e.fright=true;});
+    }
+    hud();
+    if(dotCount<=0) levelDone();
+  }
+  function update(dt){
+    if(state==='hit'){
+      hitT-=dt;
+      if(hitT<=0){
+        if(lives<=0) gameOver(false);
+        else{resetPositions(); setState('playing');}
+      }
+      return;
+    }
+    if(state!=='playing') return;
+    if(want&&(player.dx||player.dy)&&player.t>0&&want[0]===-player.dx&&want[1]===-player.dy){
+      const nx=player.tx+player.dx;
+      if(nx>=0&&nx<C){player.tx=nx; player.ty+=player.dy; player.t=1-player.t; player.dx=-player.dx; player.dy=-player.dy;}
+    }
+    advance(player,PSPEED*dt,playerChooser);
+    eatDots();
+    if(state!=='playing') return;
+    if(frightT>0){
+      frightT-=dt;
+      if(frightT<=0) enemies.forEach(function(e){e.fright=false;});
+    }
+    for(const en of enemies){
+      if(!en.alive){
+        en.respawn-=dt;
+        if(en.respawn<=0){en.tx=en.home[0]; en.ty=en.home[1]; en.dx=0; en.dy=0; en.t=0; en.alive=true; en.fright=false; en.delay=0.5;}
+        continue;
+      }
+      if(en.delay>0){en.delay-=dt; continue;}
+      advance(en,(en.fright?P.spd*0.55:P.spd)*dt,enemyChooser);
+    }
+    const pp=pos(player);
+    for(const en of enemies){
+      if(!en.alive) continue;
+      const ep=pos(en);
+      if(Math.hypot(pp.x-ep.x,pp.y-ep.y)<0.62){
+        if(en.fright){en.alive=false; en.fright=false; en.respawn=4; score+=200; Snd.eatDrone(); hud();}
+        else{loseLife(); return;}
+      }
+    }
+  }
+
+  /* ---------- drawing ---------- */
+  function rr(x,y,w,h,r){
+    ctx.beginPath(); ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+  function drawDrone(e,ts){
+    const p=pos(e),cx=p.x*T+T/2,cy=p.y*T+T/2,r=T*0.38;
+    let col=e.color;
+    if(e.fright) col=(frightT<1.5&&Math.floor(ts/180)%2)?'#ffffff':'#4C7EFF';
+    ctx.fillStyle=col; ctx.strokeStyle=col; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(cx,cy-r*0.8); ctx.lineTo(cx,cy-r*1.2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy-r*1.25,2.6,0,Math.PI*2); ctx.fill();
+    rr(cx-r,cy-r*0.8,r*2,r*1.75,r*0.5); ctx.fill();
+    ctx.fillStyle='#fff';
+    ctx.beginPath(); ctx.arc(cx-r*0.42,cy-r*0.1,r*0.3,0,Math.PI*2); ctx.arc(cx+r*0.42,cy-r*0.1,r*0.3,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle=NAVY;
+    const ox=e.dx*r*0.12,oy=e.dy*r*0.12;
+    ctx.beginPath(); ctx.arc(cx-r*0.42+ox,cy-r*0.1+oy,r*0.14,0,Math.PI*2); ctx.arc(cx+r*0.42+ox,cy-r*0.1+oy,r*0.14,0,Math.PI*2); ctx.fill();
+  }
+  function draw(ts){
+    ctx.drawImage(mazeCv,0,0);
+    for(let y=0;y<R;y++) for(let x=0;x<C;x++){
+      const v=dots[y][x];
+      if(!v) continue;
+      const cx=x*T+T/2,cy=y*T+T/2;
+      if(v===1){ctx.fillStyle=DOTC; ctx.fillRect(cx-3,cy-3,6,6);}
+      else{
+        ctx.fillStyle='#bff6ff'; ctx.strokeStyle=DOTC; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.arc(cx,cy,8+Math.sin(ts/180)*2,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      }
+    }
+    for(const en of enemies) if(en.alive) drawDrone(en,ts);
+    if(player&&!(state==='hit'&&Math.floor(ts/120)%2)){
+      const p=pos(player),cx=p.x*T+T/2,cy=p.y*T+T/2,r=T*0.38;
+      ctx.fillStyle='#FFD21F'; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,.55)'; ctx.beginPath(); ctx.arc(cx-r*0.35,cy-r*0.38,r*0.22,0,Math.PI*2); ctx.fill();
+    }
+  }
+  let last=0;
+  function frame(ts){
+    const dt=Math.min(0.05,(ts-last)/1000||0); last=ts;
+    update(dt); draw(ts);
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- controls ---------- */
+  function setDir(k){if(VEC[k]) want=VEC[k];}
+  const KEYS={ArrowUp:'u',ArrowDown:'d',ArrowLeft:'l',ArrowRight:'r',w:'u',W:'u',s:'d',S:'d',a:'l',A:'l',d:'r',D:'r'};
+  document.addEventListener('keydown',function(e){
+    if(e.key==='p'||e.key==='P'){
+      if(state==='playing') pause(); else if(state==='paused') resume();
+      return;
+    }
+    const k=KEYS[e.key];
+    if(!k) return;
+    if(state==='playing'||state==='hit'||state==='banner'){e.preventDefault(); setDir(k);}
+  });
+  let sx=0,sy=0,sw=false;
+  cv.addEventListener('pointerdown',function(e){
+    sx=e.clientX; sy=e.clientY; sw=true;
+    try{cv.setPointerCapture(e.pointerId);}catch(err){}
+  });
+  cv.addEventListener('pointermove',function(e){
+    if(!sw) return;
+    const dx=e.clientX-sx,dy=e.clientY-sy;
+    if(Math.max(Math.abs(dx),Math.abs(dy))>18){
+      setDir(Math.abs(dx)>Math.abs(dy)?(dx>0?'r':'l'):(dy>0?'d':'u'));
+      sx=e.clientX; sy=e.clientY;
+    }
+  });
+  cv.addEventListener('pointerup',function(){sw=false;});
+  cv.addEventListener('pointercancel',function(){sw=false;});
+  document.querySelectorAll('.dpad button').forEach(function(b){
+    b.addEventListener('pointerdown',function(e){e.preventDefault(); setDir(b.getAttribute('data-d'));});
+  });
+  startBtn.addEventListener('click',function(){
+    Snd.init();
+    if(state==='paused') resume(); else newGame();
+  });
+  goAgain.addEventListener('click',function(){Snd.init(); newGame();});
+  function muteIcon(){muteBtn.textContent=Snd.isMuted()?'🔇':'🔊';}
+  muteBtn.addEventListener('click',function(){Snd.toggle(); muteIcon(); Snd.init();});
+  muteIcon();
+  document.addEventListener('visibilitychange',function(){if(document.hidden) pause();});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      if(!es[0].isIntersecting) pause();
+    },{threshold:0.1}).observe(cv);
+  }
+
+  /* ---------- init: show the first maze behind the start screen ---------- */
+  buildLevel(); resetPositions(); hud(); setState('idle');
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
